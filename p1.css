@@ -1,0 +1,295 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #F0F8FF;
+}
+
+header {
+    background-color: #B22222;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    border-style: outset;
+    border-radius: 7px;
+    padding: 6px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.description-title {
+    text-align: center;
+}
+
+.background-description {
+    font-family: "Parkinsans", serif;
+    font-size: 1.1em;
+    border: 3px solid #008000;
+    padding: 20px;
+    background-color: #F0FFF0;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 8px;
+    line-height: 25px;
+}
+
+.prices {
+    width: 40%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #FFFFFF;
+    border: 2px solid #B22222;
+    border-radius: 10px;
+}
+
+.prices td {
+    border: 1px solid #B22222;
+    padding: 12px;
+    text-align: center;
+    background-color: #F0FFF0;
+    font-size: 1.2rem;
+}
+
+.price-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0;
+    color: #B22222;
+}
+
+.only-rule {
+    text-align: center;
+    margin-top: 0;
+    text-decoration-line: underline;
+    text-decoration-style: double;
+}
+
+.orders {
+    max-width: 50%;
+    margin: auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #008000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.process {
+    border: 1px solid #B22222;
+    padding: 5px;
+    margin-top: -5px
+}
+
+.payment-type {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.payment-type label {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.payment-type input[type="radio"] {
+    display: none; /* Hide default radio buttons */
+}
+
+.payment-type input[type="radio"]:checked + label {
+    background-color: #006400; /* Change color when selected */
+}
+
+/* Additional colors for Venmo and Cash radio buttons */
+#venmo:checked + label {
+    background-color: #1c6f95; /* Different color for Venmo */
+}
+
+#cash:checked + label {
+    background-color: #8b4513; /* Different color for Cash */
+}
+
+#venmo-details, #zelle-details {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #B22222;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #008000;
+    border-radius: 4px;
+    background-color: #F0FFF0;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #006400;
+}
+
+.tamale-pics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.tamale-pics img {
+    max-width: 30%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.quantity-controls button {
+    padding: 10px;
+    font-size: 1.2rem;
+    background-color: #B22222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.quantity-controls input[type="number"] {
+    width: 60px;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 5px;
+    border: 1px solid #008000;
+    border-radius: 4px;
+    background-color: #F0FFF0;
+}
+
+/* Specifically target the unordered lists within the pickup-message, delivery-message, and payment-message containers */
+
+/* General styles for unordered lists inside pickup-message, delivery-message, and payment-message */
+#pickup-message ul, 
+#delivery-message ul, 
+.payment-message ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+    font-family: Arial, sans-serif; /* Same font as the body */
+    color: #333; /* Darker text color for better readability */
+    font-size: 1.1rem; /* Consistent font size */
+}
+
+/* Style for list items inside these parent containers */
+#pickup-message ul li, 
+#delivery-message ul li, 
+.payment-message ul li {
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #F0FFF0; /* Light green background for each list item */
+    border-radius: 5px;
+    border: 1px solid #B22222; /* Matching border color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow to add depth */
+}
+
+}
+
+/* Nested lists, if any, inside these parent containers */
+#pickup-message ul ul, 
+#delivery-message ul ul, 
+.payment-message ul ul {
+    padding-left: 20px; /* Indent nested lists */
+    margin-top: 10px;
+    font-size: 1rem; /* Slightly smaller font for nested items */
+}
+
+/* Adding some specific list styling for "pickup-rules" and "payment-message ul" sections */
+#pickup-message .pickup-rules li,
+#delivery-message .pickup-rules li,
+.payment-message ul li {
+    padding: 5px;
+}
+
+footer {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .tamale-pics {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .prices {
+        font-size: 0.9rem;
+    }
+
+    .orders {
+        padding: 15px;
+        width: 500px;
+    }
+}

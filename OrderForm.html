@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form - Some DAM Tamales</title>
+    <link rel="stylesheet" href="p1.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Some DAM Tamales</h1>
+        <nav>
+            <ul class="header-tab">
+                <li><a href="P1.html">DAM Tamales</a></li>
+                <li><a href="OrderForm.html">Order Form</a></li>
+            </ul>
+        </nav>
+					<p><em>TRIANGLE AREA ONLY</em></p>
+
+    </header>
+
+    <section>
+        <h1 class="price-title">Prices</h1>
+        <p class="only-rule">(Gluten Free, Pork Tamales only)</p>
+        <table class="prices">
+            <tr>
+                <td>Single</td>
+                <td>$3.50</td>
+            </tr>
+            <tr>
+                <td>1/2 Dozen</td>
+                <td>$20</td>
+            </tr>
+            <tr>
+                <td>Dozen</td>
+                <td>$40</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="container">
+        <form class="orders" action="https://formspree.io/f/xqakvwlo" method="POST" id="order-form">
+            <fieldset>
+                <legend>Order Form (* required)</legend>
+                <p class="process">Once we receive your order request and have received your payment, we will notify you when your order is ready to be picked up or has been dropped off.</p>
+                <label for="name">*Full Name:</label><br>
+                <input type="text" id="name" name="name" required><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+
+                <label for="phone">*Phone Number:</label><br>
+                <input type="tel" id="phone" name="phone" required><br>
+
+                <label for="address">*Address:</label><br>
+                <textarea id="address" name="address" rows="2" required></textarea>
+
+                <label for="quantity">*Quantity:</label><br>
+                <div class="quantity-controls">
+                    <button type="button" id="decrease">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+                    <button type="button" id="increase">+</button>
+                </div>
+
+                <p>Total Cost: $<span id="total-cost">3.50</span></p>
+
+                <!-- Pickup/Delivery Section -->
+                <label for="pickup-delivery">Select Pickup or Delivery:</label><br>
+                <div class="pickup-delivery-type">
+                    <input type="radio" id="pickup" name="pickup-delivery" value="Pickup" onclick="togglePickupDeliveryMessage('pickup')" checked>
+                    <label for="pickup">Pickup</label><br>
+                    <div id="pickup-message" class="pickup-delivery-message" style="display:none;">
+                        <ul class="pickup-rules">
+                            <li>Your order will be ready for pickup at our location.</li>
+                            <li>If paying with Venmo, please pay before submitting your order. If there is no payment, you will not be notified when your order is ready for pickup.</li>
+                            <li>If paying with cash, please have the cash with you to pick up.</li>
+                        </ul>
+                    </div>
+
+                    <input type="radio" id="delivery" name="pickup-delivery" value="Delivery" onclick="togglePickupDeliveryMessage('delivery')">
+                    <label for="delivery">Delivery</label><br>
+                    <div id="delivery-message" class="pickup-delivery-message" style="display:none;">
+                        <ul class="delivery-rules">
+                            <li>Your order will be delivered to your address provided.</li>
+                            <li>If paying with Venmo, complete the payment before submitting your order. Otherwise, your order will not be delivered.</li>
+                            <li>If paying with cash, we will work out details separately.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <label for="payment">Select Payment Type:</label><br>
+                <div class="payment-type">
+                    <input type="radio" id="venmo" name="payment" value="Venmo" onclick="navigatePayment('venmo')">
+                    <label for="venmo">Venmo</label><br>
+                    <div id="venmo-message" class="payment-message" style="display:none;">
+                        <p>You can pay before submitting your order through Venmo by clicking the link below:</p>
+                        <a href="https://venmo.com/Rene-Madrid-4" target="_blank" class="venmo-link">Pay via Venmo</a>
+                    </div>
+
+                    <input type="radio" id="cash" name="payment" value="Cash" checked onclick="navigatePayment('cash')">
+                    <label for="cash">Cash</label><br>
+                </div>
+                <div id="cash-message" class="payment-message" style="display:none;">
+                    <p>Please bring cash to your order pickup.</p>
+                </div>
+				
+				<div></div>
+				
+				 <label for="comments">Additional Comments or Questions:</label><br>
+                <textarea id="comments" name="comments" rows="3"></textarea>
+            </fieldset>
+
+            <button type="submit">Submit & Order</button>
+        </form>
+    </section>
+
+    <footer></footer>
+
+    <script>
+        // Price values
+        const priceSingle = 3.50;
+        const priceHalfDozen = 20;
+        const priceDozen = 40;
+
+        // Get references to the quantity and total cost elements
+        const quantityInput = document.getElementById('quantity');
+        const totalCostElement = document.getElementById('total-cost');
+
+        // Update the total cost whenever the quantity changes
+        function updateTotalCost() {
+            let quantity = parseInt(quantityInput.value);
+            let totalCost = 0;
+
+            if (quantity < 6) {
+                totalCost = quantity * priceSingle;
+            } else if (quantity === 6) {
+                totalCost = priceHalfDozen;
+            } else if (quantity < 12) {
+                totalCost = priceHalfDozen + (quantity - 6) * priceSingle;
+            } else if (quantity === 12) {
+                totalCost = priceDozen;
+            } else {
+                totalCost = priceDozen + (quantity - 12) * priceSingle;
+            }
+
+            totalCostElement.textContent = totalCost.toFixed(2);
+        }
+
+        // Event listeners to update the total cost when the quantity is adjusted
+        document.getElementById('increase').addEventListener('click', function() {
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updateTotalCost();
+        });
+
+        document.getElementById('decrease').addEventListener('click', function() {
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                updateTotalCost();
+            }
+        });
+
+        // Initialize total cost calculation on page load
+        updateTotalCost();
+
+        // Navigate to the Venmo payment link or show the cash message based on selection
+        function navigatePayment(paymentType) {
+            if (paymentType === 'venmo') {
+                document.getElementById('venmo-message').style.display = 'block';
+                document.getElementById('cash-message').style.display = 'none';
+            } else if (paymentType === 'cash') {
+                document.getElementById('venmo-message').style.display = 'none';
+                document.getElementById('cash-message').style.display = 'block';
+            }
+        }
+
+        // Toggle the pickup/delivery messages based on the selection
+        function togglePickupDeliveryMessage(selection) {
+            if (selection === 'pickup') {
+                document.getElementById('pickup-message').style.display = 'block';
+                document.getElementById('delivery-message').style.display = 'none';
+            } else if (selection === 'delivery') {
+                document.getElementById('delivery-message').style.display = 'block';
+                document.getElementById('pickup-message').style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
